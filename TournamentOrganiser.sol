@@ -62,6 +62,13 @@ contract TournamentOrganiser is TournamentAccessControl
 		ongoingTournament = false;
 	}
 
+	function SetEntryFee(uint256 _fee) public isTournamentOrganiser
+	{
+		require(ongoingTournament == false,
+		"Ongoing tournament. Cannot set fee now.");
+		entryFee = _fee;
+	}
+
 	function RegisterToTournament() public payable isOngoing
 	{
 		require (msg.value == entryFee, "Error, wrong entry free sent.");
